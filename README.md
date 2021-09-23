@@ -72,3 +72,25 @@ More information about the usage of this directory in [the documentation](https:
 ```bash
 $ aws s3 cp dist s3://$bucket_name/ --recursive
 ```
+
+## Use TypeScript
+
+1. Install `vue-property-decorator`
+
+```bash
+$ yarn add -D nuxt-property-decorator
+$ yarn add -D nuxt-class-component
+```
+
+2. Use TS in `<script>` like:
+
+```ts
+<script lang="ts">
+import { Component, Vue } from "nuxt-property-decorator";
+
+@Component({
+    components: {},
+})
+export default class Index extends Vue {}
+</script>
+```
