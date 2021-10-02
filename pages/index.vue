@@ -2,7 +2,7 @@
     <v-container class="container">
         <mq-layout mq="sm" class="sm">
             <v-row justify="center" align-content="center" class="icon">
-                <v-col class="icon" cols="10"></v-col>
+                <nuxt-img src="/images/23.png" class="icon" />
             </v-row>
 
             <v-row justify="center" align-content="start">
@@ -12,7 +12,7 @@
 
         <mq-layout mq="lg" class="lg">
             <v-row align-content="center" class="icon">
-                <v-col class="icon" cols="7"></v-col>
+                <nuxt-img src="/images/23.png" />
                 <v-col align-self="center" cols="3">Miku Okegawa (1994-)</v-col>
             </v-row>
         </mq-layout>
@@ -36,7 +36,7 @@ export default class Index extends Vue {}
 
 @mixin row() {
     margin: 0;
-    width: 100%;
+    max-width: 100%;
 }
 
 @mixin iconRow() {
@@ -51,11 +51,12 @@ export default class Index extends Vue {}
     text-align: $horizontal;
 }
 
-@mixin iconCol($backgroundSize, $vertical, $horizontal) {
-    background-image: url("assets/images/23.png");
-    background-size: $backgroundSize;
-    background-position: $vertical $horizontal;
-    padding-bottom: 0;
+@mixin iconCol($width, $horizontal) {
+    height: 400px;
+    width: 400px;
+    max-width: $width;
+    object-fit: contain;
+    text-align: $horizontal;
 }
 
 .container {
@@ -72,7 +73,7 @@ export default class Index extends Vue {}
             }
 
             .icon {
-                @include iconCol(80%, bottom, center);
+                @include iconCol(100%, center);
             }
         }
 
@@ -92,7 +93,11 @@ export default class Index extends Vue {}
             }
 
             .icon {
-                @include iconCol(50%, center, right);
+                @include iconCol(50%, right);
+
+                img {
+                    width: 60%;
+                }
             }
         }
 
