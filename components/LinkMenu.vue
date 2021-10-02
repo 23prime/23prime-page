@@ -1,5 +1,5 @@
 <template>
-    <nuxt-link to="/foo">
+    <nuxt-link :to="link">
         <v-list-item link>
             <v-list-item-action>
                 <v-icon>{{ icon }}</v-icon>
@@ -23,5 +23,8 @@ export default class LinkMenu extends Vue {
 
     @Prop({ default: "" })
     title: string = "";
+
+    @Prop({ default: "/" })
+    link: string = "";
 }
 </script>
