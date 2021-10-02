@@ -2,9 +2,9 @@
     <v-app>
         <v-navigation-drawer v-model="drawer" app>
             <v-list>
-                <link-menu icon="fa-home" title="Home" />
-                <link-menu icon="fa-id-card-alt" title="Profiles" />
-                <link-menu icon="fa-link" title="Links" />
+                <link-menu icon="fa-home" title="Home" link="/" />
+                <link-menu icon="fa-id-card-alt" title="Profiles" link="/profiles" />
+                <link-menu icon="fa-link" title="Links" link="/links" />
             </v-list>
         </v-navigation-drawer>
 
@@ -14,7 +14,7 @@
         </v-app-bar>
 
         <v-main>
-            <v-container fluid class="fill-height">
+            <v-container fluid>
                 <nuxt />
             </v-container>
         </v-main>
@@ -36,15 +36,7 @@ import LinkMenu from "@/components/LinkMenu.vue";
         LinkMenu,
     },
 })
-export default class VuetifyTestPage extends Vue {
+export default class DefaultLayout extends Vue {
     drawer = null;
 }
 </script>
-
-<style lang="scss" scoped>
-.fill-height {
-    background-image: url("assets/images/construction.png");
-    background-size: cover;
-    background-position: center center;
-}
-</style>
