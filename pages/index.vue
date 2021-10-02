@@ -2,7 +2,7 @@
     <v-container class="container">
         <mq-layout mq="sm" class="sm">
             <v-row justify="center" align-content="center" class="icon">
-                <nuxt-img src="/images/23.png" class="icon" />
+                <img src="/images/23.png" class="icon" />
             </v-row>
 
             <v-row justify="center" align-content="start">
@@ -12,7 +12,7 @@
 
         <mq-layout mq="lg" class="lg">
             <v-row align-content="center" class="icon">
-                <nuxt-img src="/images/23.png" />
+                <img src="/images/23.png" />
                 <v-col align-self="center" cols="3">Miku Okegawa (1994-)</v-col>
             </v-row>
         </mq-layout>
