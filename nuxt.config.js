@@ -24,7 +24,7 @@ export default {
     },
 
     // Global CSS: https://go.nuxtjs.dev/config-css
-    css: [],
+    css: ["ress"],
 
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
     plugins: [],
@@ -38,13 +38,14 @@ export default {
         "@nuxt/typescript-build",
         // https://go.nuxtjs.dev/vuetify
         "@nuxtjs/vuetify",
+        // https://github.com/nuxt-community/style-resources-module
+        "@nuxtjs/style-resources",
     ],
 
     // Modules: https://go.nuxtjs.dev/config-modules
     modules: [
         // https://go.nuxtjs.dev/axios
         "@nuxtjs/axios",
-        "@nuxtjs/style-resources",
         [
             "nuxt-mq",
             {
@@ -90,6 +91,6 @@ export default {
     },
 
     styleResources: {
-        scss: ["@/assets/sass/common.scss"],
+        scss: ["~/assets/sass/common.scss"],
     },
 };
