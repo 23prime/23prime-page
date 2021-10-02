@@ -44,6 +44,7 @@ export default {
     modules: [
         // https://go.nuxtjs.dev/axios
         "@nuxtjs/axios",
+        "@nuxtjs/style-resources",
     ],
 
     // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -51,6 +52,7 @@ export default {
 
     // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
     vuetify: {
+        defaultAssets: { icons: "fa" },
         customVariables: ["~/assets/variables.scss"],
         theme: {
             dark: true,
@@ -74,5 +76,9 @@ export default {
     server: {
         port: 3023,
         host: "0.0.0.0",
+    },
+
+    styleResources: {
+        scss: ["@/assets/sass/common.scss"],
     },
 };

@@ -2,14 +2,9 @@
     <v-app>
         <v-navigation-drawer v-model="drawer" app>
             <v-list>
-                <v-list-item link>
-                    <v-list-item-action>
-                        <v-icon>mdi-home</v-icon>
-                    </v-list-item-action>
-                    <v-list-item-content>
-                        <v-list-item-title>Home</v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
+                <link-menu icon="fa-home" title="Home" />
+                <link-menu icon="fa-id-card-alt" title="Profiles" />
+                <link-menu icon="fa-link" title="Links" />
             </v-list>
         </v-navigation-drawer>
 
@@ -34,16 +29,19 @@
 
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
+import LinkMenu from "@/components/LinkMenu.vue";
 
 @Component({
-    components: {},
+    components: {
+        LinkMenu,
+    },
 })
 export default class VuetifyTestPage extends Vue {
     drawer = null;
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .fill-height {
     background-image: url("assets/images/construction.png");
     background-size: cover;
