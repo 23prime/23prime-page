@@ -28,3 +28,10 @@ export default class LinkMenu extends Vue {
     link: string = "";
 }
 </script>
+
+<style lang="scss" scoped>
+a {
+    // Force kill 'a:-webkit-any-link'
+    text-decoration: none;
+}
+</style>
