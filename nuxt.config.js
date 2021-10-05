@@ -5,8 +5,7 @@ let envConfig;
 switch (process.env.NODE_ENV) {
     case "production":
         envConfig = {
-            // ToDo: Set apiBaseUrl
-            apiBaseUrl: "http://localhost:8080",
+            apiBaseUrl: "https://api.23prime.xyz",
             authority: "https://23prime.jp.auth0.com",
             clientId: "yKhbwNWowq8cAHPzwPwA07j8T80DPHDz",
         };
