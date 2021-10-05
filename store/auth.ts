@@ -1,6 +1,6 @@
 import { Module, VuexModule, Mutation, Action } from "vuex-module-decorators";
 
-type Auth = { id: number; token: string } | null;
+type Auth = { id: string; token: string } | null;
 
 @Module({
     name: "auth",
@@ -10,7 +10,7 @@ type Auth = { id: number; token: string } | null;
 export default class AuthModule extends VuexModule {
     private auth!: Auth;
 
-    KEY_NAME = "auth";
+    public KEY_NAME = "auth";
 
     public get getAuth() {
         return this.auth;

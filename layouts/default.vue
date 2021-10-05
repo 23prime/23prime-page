@@ -14,7 +14,11 @@
                     <link-menu icon="fa-link" title="Links" />
                 </nuxt-link>
 
-                <div @click="login">
+                <div v-if="logined" @click="logout">
+                    <link-menu icon="fa-sign-out-alt" title="Logout" />
+                </div>
+
+                <div v-else @click="login">
                     <link-menu icon="fa-sign-in-alt" title="Login" />
                 </div>
             </v-list>
@@ -43,6 +47,7 @@
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
 import LinkMenu from "@/components/LinkMenu.vue";
+import { AuthStore } from "@/store";
 
 @Component({
     components: {
@@ -50,7 +55,13 @@ import LinkMenu from "@/components/LinkMenu.vue";
     },
 })
 export default class DefaultLayout extends Vue {
-    drawer = null;
+    private drawer = null;
+    private logined = false;
+
+    async mounted() {
+        const auth = await AuthStore.load();
+        this.logined = !!auth;
+    }
 
     private login() {
         const queryParams = [
@@ -61,6 +72,12 @@ export default class DefaultLayout extends Vue {
             "state=hoge",
         ];
         window.location.href = `${process.env.AUTHORITY}/authorize?${queryParams.join("&")}`;
+    }
+
+    private async logout() {
+        await AuthStore.destroy();
+        this.$router.push("/");
+        location.reload();
     }
 }
 </script>

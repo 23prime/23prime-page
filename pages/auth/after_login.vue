@@ -4,17 +4,29 @@
 
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
+import { AuthStore } from "@/store";
 
 @Component({
     components: {},
 })
 export default class AfterLogin extends Vue {
     mounted() {
-        const auth = this.$route.query;
-        this.$nuxt.$store.dispatch("auth/save", auth);
-        this.$router.push("/");
+        const query = this.$route.query;
+        const id = this.queryToString(query.id);
+        const token = this.queryToString(query.access_token);
+
+        if (id && token) {
+            const auth = { id, token };
+            AuthStore.save(auth);
+            this.$router.push("/");
+        } else {
+            this.$router.push("/auth/login_failed");
+        }
+    }
+
+    private queryToString(value: string | (string | null)[] | undefined): string | null {
+        if (Array.isArray(value)) return value[0] ? value[0] : null;
+        return value || null;
     }
 }
 </script>
-
-<style></style>
