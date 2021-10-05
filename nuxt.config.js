@@ -1,5 +1,24 @@
 import colors from "vuetify/es5/util/colors";
 
+let envConfig;
+
+switch (process.env.NODE_ENV) {
+    case "production":
+        envConfig = {
+            // ToDo: Set apiBaseUrl
+            apiBaseUrl: "http://localhost:8080",
+            authority: "https://23prime.jp.auth0.com",
+            clientId: "yKhbwNWowq8cAHPzwPwA07j8T80DPHDz",
+        };
+        break;
+    default:
+        envConfig = {
+            apiBaseUrl: "http://localhost:8080",
+            authority: "https://23prime.jp.auth0.com",
+            clientId: "yKhbwNWowq8cAHPzwPwA07j8T80DPHDz",
+        };
+}
+
 export default {
     // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
     ssr: false,
@@ -92,5 +111,11 @@ export default {
 
     styleResources: {
         scss: ["~/assets/sass/common.scss"],
+    },
+
+    env: {
+        API_BASE_URL: envConfig.apiBaseUrl,
+        AUTHORITY: envConfig.authority,
+        CLIENT_ID: envConfig.clientId,
     },
 };

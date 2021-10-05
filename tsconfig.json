@@ -17,5 +17,16 @@
         },
         "types": ["@nuxt/types", "@nuxtjs/axios", "@types/node"]
     },
+    // Suppress import error by VSCode
+    "include": [
+        "components/**/*.ts",
+        "components/**/*.vue",
+        "layouts/**/*.ts",
+        "layouts/**/*.vue",
+        "pages/**/*.ts",
+        "pages/**/*.vue",
+        "store/**/*.ts",
+        "utils/**/*.ts"
+    ],
     "exclude": ["node_modules", ".nuxt", "dist"]
 }

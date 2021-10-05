@@ -1,16 +1,29 @@
 <template>
     <v-app>
-        <v-navigation-drawer v-model="drawer" app>
+        <v-navigation-drawer v-model="drawer" app right>
             <v-list>
-                <link-menu icon="fa-home" title="Home" link="/" />
-                <link-menu icon="fa-id-card-alt" title="Profiles" link="/profiles" />
-                <link-menu icon="fa-link" title="Links" link="/links" />
+                <nuxt-link to="/">
+                    <link-menu icon="fa-home" title="Home" />
+                </nuxt-link>
+
+                <nuxt-link to="/profiles">
+                    <link-menu icon="fa-id-card-alt" title="Profiles" />
+                </nuxt-link>
+
+                <nuxt-link to="/links">
+                    <link-menu icon="fa-link" title="Links" />
+                </nuxt-link>
+
+                <div @click="login">
+                    <link-menu icon="fa-sign-in-alt" title="Login" />
+                </div>
             </v-list>
         </v-navigation-drawer>
 
         <v-app-bar app>
-            <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
             <v-toolbar-title>Welcome to Okkey's page!</v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         </v-app-bar>
 
         <v-main>
@@ -38,5 +51,23 @@ import LinkMenu from "@/components/LinkMenu.vue";
 })
 export default class DefaultLayout extends Vue {
     drawer = null;
+
+    private login() {
+        const queryParams = [
+            "response_type=code",
+            `client_id=${process.env.CLIENT_ID}`,
+            `redirect_uri=${process.env.API_BASE_URL}/auth/callback`,
+            "scope=openid",
+            "state=hoge",
+        ];
+        window.location.href = `${process.env.AUTHORITY}/authorize?${queryParams.join("&")}`;
+    }
 }
 </script>
+
+<style lang="scss" scoped>
+a {
+    // Force kill 'a:-webkit-any-link'
+    text-decoration: none;
+}
+</style>
