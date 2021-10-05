@@ -6,9 +6,7 @@
 import { Component, Vue } from "nuxt-property-decorator";
 import { AuthStore } from "@/store";
 
-@Component({
-    components: {},
-})
+@Component({ components: {} })
 export default class AfterLogin extends Vue {
     mounted() {
         const query = this.$route.query;

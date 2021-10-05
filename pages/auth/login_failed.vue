@@ -1,13 +1,13 @@
 <template>
-    <div>login failed</div>
+    <div>
+        <h1>Login failed</h1>
+        <nuxt-link to="/">Home</nuxt-link>
+    </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
 
-@Component({
-    layout: "error",
-    components: {},
-})
+@Component({ components: {} })
 export default class LoginFailed extends Vue {}
 </script>
