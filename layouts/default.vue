@@ -64,11 +64,12 @@ export default class DefaultLayout extends Vue {
     }
 
     private login() {
+        const scopes = ["openid", "profile"];
         const queryParams = [
             "response_type=code",
             `client_id=${process.env.CLIENT_ID}`,
             `redirect_uri=${process.env.API_BASE_URL}/auth/callback`,
-            "scope=openid",
+            `scope=${scopes.join(" ")}`,
             "state=hoge",
         ];
         window.location.href = `${process.env.AUTHORITY}/authorize?${queryParams.join("&")}`;

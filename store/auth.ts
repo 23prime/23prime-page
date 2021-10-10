@@ -1,6 +1,6 @@
 import { Module, VuexModule, Mutation, Action } from "vuex-module-decorators";
 
-type Auth = { id: string; token: string } | null;
+type Auth = { id: string; name: string; token: string } | null;
 
 @Module({
     name: "auth",

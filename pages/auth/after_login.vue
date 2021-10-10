@@ -11,10 +11,11 @@ export default class AfterLogin extends Vue {
     mounted() {
         const query = this.$route.query;
         const id = this.queryToString(query.id);
+        const name = this.queryToString(query.name);
         const token = this.queryToString(query.access_token);
 
-        if (id && token) {
-            const auth = { id, token };
+        if (id && name && token) {
+            const auth = { id, name, token };
             AuthStore.save(auth);
             this.$router.push("/");
         } else {
