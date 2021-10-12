@@ -25,7 +25,13 @@ import { Component, Vue } from "nuxt-property-decorator";
 @Component({
     components: {},
 })
-export default class Index extends Vue {}
+export default class Home extends Vue {
+    head() {
+        return {
+            title: this.constructor.name,
+        };
+    }
+}
 </script>
 
 <style lang="scss" scoped>

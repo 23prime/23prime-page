@@ -8,6 +8,12 @@ import { AuthStore } from "@/store";
 
 @Component({ components: {} })
 export default class AfterLogin extends Vue {
+    head() {
+        return {
+            title: this.constructor.name,
+        };
+    }
+
     mounted() {
         const query = this.$route.query;
         const id = this.queryToString(query.id);

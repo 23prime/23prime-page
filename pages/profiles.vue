@@ -46,7 +46,13 @@
 import { Component, Vue } from "nuxt-property-decorator";
 
 @Component({})
-export default class Profiles extends Vue {}
+export default class Profiles extends Vue {
+    head() {
+        return {
+            title: this.constructor.name,
+        };
+    }
+}
 </script>
 
 <style lang="scss" scoped>
