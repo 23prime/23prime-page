@@ -1,7 +1,10 @@
 <template>
     <tr>
         <th>{{ header }}</th>
-        <td>{{ data }}</td>
+        <td v-if="url">
+            <v-btn class="v-btn-overwrite" text @click="openLinkInNewTab(link)">{{ data }}</v-btn>
+        </td>
+        <td v-else>{{ data }}</td>
     </tr>
 </template>
 
@@ -15,6 +18,13 @@ export default class ListTableItem extends Vue {
 
     @Prop({ default: "" })
     data!: string;
+
+    @Prop({ default: null })
+    url!: string;
+
+    openLinkInNewTab() {
+        window.open(this.url, "_blank");
+    }
 }
 </script>
 
@@ -40,5 +50,9 @@ td {
     td {
         display: block;
     }
+}
+
+.v-btn-overwrite {
+    text-transform: none;
 }
 </style>
