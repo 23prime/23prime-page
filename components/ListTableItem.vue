@@ -1,0 +1,44 @@
+<template>
+    <tr>
+        <th>{{ header }}</th>
+        <td>{{ data }}</td>
+    </tr>
+</template>
+
+<script lang="ts">
+import { Component, Prop, Vue } from "nuxt-property-decorator";
+
+@Component({})
+export default class ListTableItem extends Vue {
+    @Prop({ default: "" })
+    header!: string;
+
+    @Prop({ default: "" })
+    data!: string;
+}
+</script>
+
+<style lang="scss" scoped>
+th {
+    font-weight: normal;
+    background: #181818;
+    vertical-align: middle;
+    padding: 1rem;
+}
+
+td {
+    padding: 0.75rem 1rem 1.75rem;
+}
+
+th,
+td {
+    padding: 1.25rem;
+}
+
+@media (max-width: 767px) {
+    th,
+    td {
+        display: block;
+    }
+}
+</style>
