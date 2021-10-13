@@ -46,7 +46,7 @@ import ListTableItem from "@/components/ListTableItem.vue";
 export default class Links extends Vue {
     head() {
         return {
-            title: this.constructor.name,
+            title: "Links",
         };
     }
 }

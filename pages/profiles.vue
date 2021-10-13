@@ -33,7 +33,7 @@ import ListTableItem from "@/components/ListTableItem.vue";
 export default class Profiles extends Vue {
     head() {
         return {
-            title: this.constructor.name,
+            title: "Profiles",
         };
     }
 }
