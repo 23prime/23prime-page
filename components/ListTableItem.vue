@@ -51,8 +51,4 @@ td {
         display: block;
     }
 }
-
-.v-btn-overwrite {
-    text-transform: none;
-}
 </style>
