@@ -14,6 +14,12 @@
                     <link-menu icon="fa-link" title="Links" />
                 </nuxt-link>
 
+                <div v-if="logined">
+                    <nuxt-link to="/admin/anime">
+                        <link-menu icon="fa-edit" title="Anime" />
+                    </nuxt-link>
+                </div>
+
                 <div v-if="logined" @click="logout">
                     <link-menu icon="fa-sign-out-alt" title="Logout" />
                 </div>

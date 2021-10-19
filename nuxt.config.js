@@ -45,7 +45,7 @@ export default {
     css: ["ress"],
 
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-    plugins: [],
+    plugins: ["@/plugins/axios", "@/plugins/axios-accessor"],
 
     // Auto import components: https://go.nuxtjs.dev/config-components
     components: true,
@@ -78,7 +78,9 @@ export default {
     ],
 
     // Axios module configuration: https://go.nuxtjs.dev/config-axios
-    axios: {},
+    axios: {
+        baseURL: envConfig.apiBaseUrl,
+    },
 
     // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
     vuetify: {
