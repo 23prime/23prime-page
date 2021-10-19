@@ -26,7 +26,8 @@
         "pages/**/*.ts",
         "pages/**/*.vue",
         "store/**/*.ts",
-        "utils/**/*.ts"
+        "utils/**/*.ts",
+        "middleware/**/*.ts"
     ],
     "exclude": ["node_modules", ".nuxt", "dist"]
 }
