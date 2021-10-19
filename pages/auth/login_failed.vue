@@ -10,7 +10,7 @@ import { Component, Vue } from "nuxt-property-decorator";
 
 @Component({ components: {} })
 export default class LoginFailed extends Vue {
-    head() {
+    private head() {
         return {
             title: this.constructor.name,
         };

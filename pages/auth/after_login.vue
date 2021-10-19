@@ -8,7 +8,7 @@ import { AuthStore } from "@/store";
 
 @Component({ components: {} })
 export default class AfterLogin extends Vue {
-    head() {
+    private head() {
         return {
             title: this.constructor.name,
         };

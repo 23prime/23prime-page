@@ -27,7 +27,7 @@ export default class Error extends Vue {
         statusCode: number;
     };
 
-    head() {
+    private head() {
         const title = this.error.statusCode === 404 ? this.pageNotFound : this.otherError;
         return { title };
     }

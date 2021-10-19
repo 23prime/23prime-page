@@ -26,7 +26,7 @@ import { Component, Vue } from "nuxt-property-decorator";
     components: {},
 })
 export default class Home extends Vue {
-    head() {
+    private head() {
         return {
             title: "Home",
         };

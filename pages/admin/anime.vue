@@ -29,7 +29,7 @@ import { $axios } from "~/utils/api";
     components: {},
 })
 export default class Profiles extends Vue {
-    head() {
+    private head() {
         return {
             title: "Anime",
         };

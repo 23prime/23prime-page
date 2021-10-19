@@ -31,7 +31,7 @@ import ListTableItem from "@/components/ListTableItem.vue";
     },
 })
 export default class Profiles extends Vue {
-    head() {
+    private head() {
         return {
             title: "Profiles",
         };
