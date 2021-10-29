@@ -4,11 +4,11 @@
 
         <v-row>
             <div class="anime-btn-wrapper">
-                <v-btn class="v-btn-overwrite" @click="showAnimes"> Show Animes </v-btn>
+                <v-btn class="v-btn-overwrite" @click="showAnimes">Show</v-btn>
             </div>
 
             <div class="anime-btn-wrapper">
-                <v-btn class="v-btn-overwrite" @click="clearAnimes"> Clear Animes </v-btn>
+                <v-btn class="v-btn-overwrite" @click="clearAnimes">Clear</v-btn>
             </div>
         </v-row>
 
