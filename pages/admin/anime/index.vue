@@ -10,6 +10,10 @@
             <div class="anime-btn-wrapper">
                 <v-btn class="v-btn-overwrite" @click="clearAnimes">Clear</v-btn>
             </div>
+
+            <div class="anime-btn-wrapper">
+                <nuxt-link to="./anime/new"><v-btn class="v-btn-overwrite">New</v-btn></nuxt-link>
+            </div>
         </v-row>
 
         <v-spacer></v-spacer>
