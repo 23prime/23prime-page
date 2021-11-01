@@ -1,6 +1,8 @@
 <template>
     <v-container>
-        <v-alert v-show="failedMsg" type="error">{{ failedMsg }}</v-alert>
+        <v-alert v-if="failedMsg" type="error" dense dismissible>{{ failedMsg }}</v-alert>
+        <v-alert v-if="successMsg" type="success" dense dismissible>{{ successMsg }}</v-alert>
+        <v-alert v-if="loading" type="info" dense dismissible>loading...</v-alert>
 
         <v-row>
             <div class="anime-btn-wrapper">
@@ -14,15 +16,25 @@
             </div>
 
             <div class="anime-btn-wrapper">
-                <v-btn class="v-btn-overwrite" @click="scrapeAnimes">Scrape</v-btn>
+                <v-btn class="v-btn-overwrite" :disabled="loading" @click="scrapeAnimes">
+                    Scrape
+                </v-btn>
             </div>
 
             <div class="anime-btn-wrapper">
-                <v-btn class="v-btn-overwrite" @click="clearAnimes">Clear</v-btn>
+                <v-btn class="v-btn-overwrite" :disabled="loading" @click="clearAnimes">
+                    Clear
+                </v-btn>
             </div>
 
             <div class="anime-btn-wrapper">
-                <v-btn class="v-btn-overwrite" @click="registerAnimes">Register</v-btn>
+                <v-btn
+                    class="v-btn-overwrite"
+                    :disabled="selectedAnimes.length < 1"
+                    @click="registerAnimes"
+                >
+                    Register
+                </v-btn>
             </div>
         </v-row>
 
@@ -123,15 +135,27 @@ export default class Profiles extends Vue {
 
     private failedMsg: string | null = null;
 
+    private successMsg: string | null = null;
+
+    private loading = false;
+
     private clearAnimes() {
-        this.failedMsg = null;
+        this.clearMsgs();
         this.animes = [];
+    }
+
+    private clearMsgs() {
+        this.failedMsg = null;
+        this.successMsg = null;
+        this.loading = false;
     }
 
     private async scrapeAnimes() {
         try {
+            this.clearMsgs();
+            this.loading = true;
             const response = await $axios.$get(`/api/scrape/${this.season}`);
-            this.failedMsg = null;
+            this.successMsg = `Succeeded to scrape and get ${response.length} animes`;
             this.animes = response.animes;
             this.animes.map((a) => (a.recommend = false));
         } catch (error: any) {
@@ -140,11 +164,26 @@ export default class Profiles extends Vue {
             } else {
                 this.failedMsg = "Failed to call API: Please try again.";
             }
+        } finally {
+            this.loading = false;
         }
     }
 
     private async registerAnimes() {
-        console.debug(this.selectedAnimes);
+        try {
+            this.clearMsgs();
+            this.loading = true;
+            const response = await $axios.$post(`/api/animes`, { animes: this.selectedAnimes });
+            this.successMsg = `Succeeded to register ${response.animes.length} animes`;
+        } catch (error: any) {
+            if (error.response?.status === 401) {
+                this.failedMsg = "Failed to call API: Aaccess token is invalid. Please re-login.";
+            } else {
+                this.failedMsg = "Failed to call API: Please try again.";
+            }
+        } finally {
+            this.loading = false;
+        }
     }
 }
 </script>
