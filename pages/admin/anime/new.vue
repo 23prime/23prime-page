@@ -1,46 +1,51 @@
 <template>
-    <v-container class="container">
-        <v-alert v-if="failedMsg" type="error" dense dismissible>{{ failedMsg }}</v-alert>
-        <v-alert v-if="successMsg" type="success" dense dismissible>{{ successMsg }}</v-alert>
-        <v-alert v-if="loading" type="info" dense dismissible>loading...</v-alert>
+    <div>
+        <v-container class="container">
+            <v-alert v-if="failedMsg" type="error" dense dismissible>{{ failedMsg }}</v-alert>
+            <v-alert v-if="successMsg" type="success" dense dismissible>{{ successMsg }}</v-alert>
+            <v-alert v-if="loading" type="info" dense dismissible>loading...</v-alert>
 
-        <v-row>
-            <div class="anime-btn-wrapper">
-                <v-select
-                    v-model="season"
-                    :items="seasons"
-                    filled
-                    label="season"
-                    item-text="state"
-                ></v-select>
-            </div>
+            <v-row>
+                <div class="anime-btn-wrapper">
+                    <v-select
+                        v-model="season"
+                        :items="seasons"
+                        filled
+                        label="season"
+                        item-text="state"
+                    >
+                    </v-select>
+                </div>
+            </v-row>
 
-            <div class="anime-btn-wrapper">
-                <v-btn class="v-btn-overwrite" :disabled="loading" @click="scrapeAnimes">
-                    Scrape
-                </v-btn>
-            </div>
+            <v-row>
+                <div class="anime-btn-wrapper">
+                    <v-btn class="v-btn-overwrite" :disabled="loading" @click="scrapeAnimes">
+                        Scrape
+                    </v-btn>
+                </div>
 
-            <div class="anime-btn-wrapper">
-                <v-btn class="v-btn-overwrite" :disabled="loading" @click="clearAnimes">
-                    Clear
-                </v-btn>
-            </div>
+                <div class="anime-btn-wrapper">
+                    <v-btn class="v-btn-overwrite" :disabled="loading" @click="clearAnimes">
+                        Clear
+                    </v-btn>
+                </div>
 
-            <div class="anime-btn-wrapper">
-                <v-btn
-                    class="v-btn-overwrite"
-                    :disabled="selectedAnimes.length < 1"
-                    @click="registerAnimes"
-                >
-                    Register
-                </v-btn>
-            </div>
+                <div class="anime-btn-wrapper">
+                    <v-btn
+                        class="v-btn-overwrite"
+                        :disabled="selectedAnimes.length < 1"
+                        @click="registerAnimes"
+                    >
+                        Register
+                    </v-btn>
+                </div>
 
-            <div class="anime-btn-wrapper">
-                <nuxt-link to="../anime"><v-btn class="v-btn-overwrite">Back</v-btn></nuxt-link>
-            </div>
-        </v-row>
+                <div class="anime-btn-wrapper">
+                    <nuxt-link to="../anime"><v-btn class="v-btn-overwrite">Back</v-btn></nuxt-link>
+                </div>
+            </v-row>
+        </v-container>
 
         <v-spacer></v-spacer>
 
@@ -91,7 +96,7 @@
                 </template>
             </v-data-table>
         </div>
-    </v-container>
+    </div>
 </template>
 
 <script lang="ts">
@@ -198,8 +203,13 @@ export default class Profiles extends Vue {
     max-width: 95%;
 }
 
+.row {
+    margin: 0;
+    padding: 0;
+}
+
 .anime-btn-wrapper {
-    padding: 32px 12px;
+    padding: 0 0.5rem;
 }
 
 .v-data-table::v-deep th,
