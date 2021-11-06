@@ -18,8 +18,19 @@
                     class="v-btn-overwrite"
                     :disabled="selectedAnimes.length < 1"
                     @click="updateAnimes"
-                    >Update</v-btn
                 >
+                    Update
+                </v-btn>
+            </div>
+
+            <div class="anime-btn-wrapper">
+                <v-btn
+                    class="v-btn-overwrite"
+                    :disabled="selectedAnimes.length < 1"
+                    @click="deleteAnimes"
+                >
+                    Delete
+                </v-btn>
             </div>
 
             <div class="anime-btn-wrapper">
@@ -161,6 +172,25 @@ export default class Profiles extends Vue {
             this.loading = true;
             const response = await $axios.$put(`/api/animes`, { animes: this.selectedAnimes });
             this.successMsg = `Succeeded to update ${response.animes.length} animes`;
+        } catch (error: any) {
+            if (error.response?.status === 401) {
+                this.failedMsg = "Failed to call API: Aaccess token is invalid. Please re-login.";
+            } else {
+                this.failedMsg = "Failed to call API: Please try again.";
+            }
+        } finally {
+            this.loading = false;
+        }
+    }
+
+    private async deleteAnimes() {
+        try {
+            this.clearMsgs();
+            this.loading = true;
+            const response = await $axios.$delete(`/api/animes`, {
+                data: { animes: this.selectedAnimes },
+            });
+            this.successMsg = `Succeeded to delete ${response.animes.length} animes`;
         } catch (error: any) {
             if (error.response?.status === 401) {
                 this.failedMsg = "Failed to call API: Aaccess token is invalid. Please re-login.";
