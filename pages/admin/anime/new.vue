@@ -36,6 +36,10 @@
                     Register
                 </v-btn>
             </div>
+
+            <div class="anime-btn-wrapper">
+                <nuxt-link to="../anime"><v-btn class="v-btn-overwrite">Back</v-btn></nuxt-link>
+            </div>
         </v-row>
 
         <v-spacer></v-spacer>
