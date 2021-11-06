@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container class="container">
         <v-alert v-if="failedMsg" type="error" dense dismissible>{{ failedMsg }}</v-alert>
         <v-alert v-if="successMsg" type="success" dense dismissible>{{ successMsg }}</v-alert>
         <v-alert v-if="loading" type="info" dense dismissible>loading...</v-alert>
@@ -92,9 +92,10 @@
 
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
-import { $axios } from "~/utils/api";
+import { $axios } from "@/utils/api";
 
 type anime = {
+    id: number | null;
     year: number;
     season: string;
     day: string;
@@ -111,7 +112,7 @@ type anime = {
 export default class Profiles extends Vue {
     private head() {
         return {
-            title: "Anime",
+            title: "Anime/new",
         };
     }
 
@@ -155,8 +156,8 @@ export default class Profiles extends Vue {
             this.clearMsgs();
             this.loading = true;
             const response = await $axios.$get(`/api/scrape/${this.season}`);
-            this.successMsg = `Succeeded to scrape and get ${response.length} animes`;
             this.animes = response.animes;
+            this.successMsg = `Succeeded to scrape and get ${this.animes.length} animes`;
             this.animes.map((a) => (a.recommend = false));
         } catch (error: any) {
             if (error.response?.status === 401) {
@@ -189,6 +190,10 @@ export default class Profiles extends Vue {
 </script>
 
 <style lang="scss" scoped>
+.container {
+    max-width: 95%;
+}
+
 .anime-btn-wrapper {
     padding: 32px 12px;
 }
