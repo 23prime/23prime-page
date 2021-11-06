@@ -1,42 +1,73 @@
 <template>
-    <v-container>
-        <v-alert v-if="failedMsg" type="error" dense dismissible>{{ failedMsg }}</v-alert>
-        <v-alert v-if="successMsg" type="success" dense dismissible>{{ successMsg }}</v-alert>
-        <v-alert v-if="loading" type="info" dense dismissible>loading...</v-alert>
+    <div>
+        <v-container>
+            <v-alert v-if="failedMsg" type="error" dense dismissible>{{ failedMsg }}</v-alert>
+            <v-alert v-if="successMsg" type="success" dense dismissible>{{ successMsg }}</v-alert>
+            <v-alert v-if="loading" type="info" dense dismissible>loading...</v-alert>
 
-        <v-row>
-            <div class="anime-btn-wrapper">
-                <v-btn class="v-btn-overwrite" @click="showAnimes">Show</v-btn>
-            </div>
+            <v-row>
+                <div class="anime-btn-wrapper">
+                    <v-select
+                        v-model="year"
+                        :items="years"
+                        filled
+                        label="year"
+                        item-text="state"
+                        clearable
+                    >
+                    </v-select>
+                </div>
 
-            <div class="anime-btn-wrapper">
-                <v-btn class="v-btn-overwrite" @click="clearAnimes">Clear</v-btn>
-            </div>
+                <div class="anime-btn-wrapper">
+                    <v-select
+                        v-model="season"
+                        :items="seasons"
+                        filled
+                        label="season"
+                        item-text="state"
+                        clearable
+                        :disabled="!year"
+                    >
+                    </v-select>
+                </div>
+            </v-row>
 
-            <div class="anime-btn-wrapper">
-                <v-btn
-                    class="v-btn-overwrite"
-                    :disabled="selectedAnimes.length < 1"
-                    @click="updateAnimes"
-                >
-                    Update
-                </v-btn>
-            </div>
+            <v-row>
+                <div class="anime-btn-wrapper">
+                    <v-btn class="v-btn-overwrite" @click="showAnimes">Show</v-btn>
+                </div>
 
-            <div class="anime-btn-wrapper">
-                <v-btn
-                    class="v-btn-overwrite"
-                    :disabled="selectedAnimes.length < 1"
-                    @click="deleteAnimes"
-                >
-                    Delete
-                </v-btn>
-            </div>
+                <div class="anime-btn-wrapper">
+                    <v-btn class="v-btn-overwrite" @click="clearAnimes">Clear</v-btn>
+                </div>
 
-            <div class="anime-btn-wrapper">
-                <nuxt-link to="./anime/new"><v-btn class="v-btn-overwrite">New</v-btn></nuxt-link>
-            </div>
-        </v-row>
+                <div class="anime-btn-wrapper">
+                    <v-btn
+                        class="v-btn-overwrite"
+                        :disabled="selectedAnimes.length < 1"
+                        @click="updateAnimes"
+                    >
+                        Update
+                    </v-btn>
+                </div>
+
+                <div class="anime-btn-wrapper">
+                    <v-btn
+                        class="v-btn-overwrite"
+                        :disabled="selectedAnimes.length < 1"
+                        @click="deleteAnimes"
+                    >
+                        Delete
+                    </v-btn>
+                </div>
+
+                <div class="anime-btn-wrapper">
+                    <nuxt-link to="./anime/new"
+                        ><v-btn class="v-btn-overwrite">New</v-btn></nuxt-link
+                    >
+                </div>
+            </v-row>
+        </v-container>
 
         <v-spacer></v-spacer>
 
@@ -87,7 +118,7 @@
                 </template>
             </v-data-table>
         </div>
-    </v-container>
+    </div>
 </template>
 
 <script lang="ts">
@@ -131,11 +162,30 @@ export default class Profiles extends Vue {
 
     private selectedAnimes: anime[] = [];
 
+    private years: number[] = [];
+
+    private year: number | null = null;
+
+    private seasons: string[] = [];
+
+    private season: string | null = null;
+
     private failedMsg: string | null = null;
 
     private successMsg: string | null = null;
 
     private loading = false;
+
+    mounted() {
+        // Set years from 2019 to next year
+        const startYear = 2019;
+        const nextYear = new Date().getFullYear() + 1;
+        this.years = Array(nextYear - startYear + 1)
+            .fill(null)
+            .map((_, i) => i + startYear);
+
+        this.seasons = ["spring", "summer", "fall", "winter"];
+    }
 
     private clearAnimes() {
         this.clearMsgs();
@@ -152,7 +202,12 @@ export default class Profiles extends Vue {
         try {
             this.clearMsgs();
             this.loading = true;
-            const response = await $axios.$get(`/api/animes`);
+            let url = "/api/animes";
+            if (this.year) {
+                url = `${url}/${this.year}`;
+                if (this.season) url = `${url}/${this.season}`;
+            }
+            const response = await $axios.$get(url);
             this.animes = response.animes;
             this.successMsg = `Succeeded to get ${this.animes.length} animes`;
         } catch (error: any) {
@@ -170,7 +225,7 @@ export default class Profiles extends Vue {
         try {
             this.clearMsgs();
             this.loading = true;
-            const response = await $axios.$put(`/api/animes`, { animes: this.selectedAnimes });
+            const response = await $axios.$put("/api/animes", { animes: this.selectedAnimes });
             this.successMsg = `Succeeded to update ${response.animes.length} animes`;
         } catch (error: any) {
             if (error.response?.status === 401) {
@@ -187,7 +242,7 @@ export default class Profiles extends Vue {
         try {
             this.clearMsgs();
             this.loading = true;
-            const response = await $axios.$delete(`/api/animes`, {
+            const response = await $axios.$delete("/api/animes", {
                 data: { animes: this.selectedAnimes },
             });
             this.successMsg = `Succeeded to delete ${response.animes.length} animes`;
@@ -209,8 +264,13 @@ export default class Profiles extends Vue {
     max-width: 95%;
 }
 
+.row {
+    margin: 0;
+    padding: 0;
+}
+
 .anime-btn-wrapper {
-    padding: 32px 12px;
+    padding: 0 0.5rem;
 }
 
 .v-data-table::v-deep th,
