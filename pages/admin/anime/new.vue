@@ -1,9 +1,11 @@
 <template>
     <div>
         <v-container>
-            <v-alert v-if="failedMsg" type="error" dense dismissible>{{ failedMsg }}</v-alert>
-            <v-alert v-if="successMsg" type="success" dense dismissible>{{ successMsg }}</v-alert>
-            <v-alert v-if="loading" type="info" dense dismissible>loading...</v-alert>
+            <status-bar
+                :failed-msg="failedMsg"
+                :success-msg="successMsg"
+                :loading="loading"
+            ></status-bar>
 
             <v-row>
                 <div class="anime-btn-wrapper">
@@ -102,6 +104,7 @@
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
 import { $axios } from "@/utils/api";
+import StatusBar from "@/components/StatusBar.vue";
 
 type anime = {
     id: number | null;
@@ -116,9 +119,9 @@ type anime = {
 
 @Component({
     middleware: ["authenticated"],
-    components: {},
+    components: { StatusBar },
 })
-export default class Profiles extends Vue {
+export default class AnimeNew extends Vue {
     private head() {
         return {
             title: "Anime/new",
