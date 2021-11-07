@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-container class="container">
+        <v-container>
             <v-alert v-if="failedMsg" type="error" dense dismissible>{{ failedMsg }}</v-alert>
             <v-alert v-if="successMsg" type="success" dense dismissible>{{ successMsg }}</v-alert>
             <v-alert v-if="loading" type="info" dense dismissible>loading...</v-alert>
