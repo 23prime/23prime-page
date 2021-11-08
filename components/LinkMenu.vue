@@ -17,9 +17,9 @@ import { Component, Prop, Vue } from "nuxt-property-decorator";
 })
 export default class LinkMenu extends Vue {
     @Prop({ default: "" })
-    icon!: string;
+    private icon!: string;
 
     @Prop({ default: "" })
-    title!: string;
+    private title!: string;
 }
 </script>

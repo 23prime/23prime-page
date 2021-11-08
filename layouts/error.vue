@@ -23,7 +23,7 @@ export default class Error extends Vue {
     private otherError = "An error occurred";
 
     @Prop({ default: null })
-    error!: {
+    private error!: {
         statusCode: number;
     };
 

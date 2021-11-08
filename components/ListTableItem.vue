@@ -14,13 +14,13 @@ import { Component, Prop, Vue } from "nuxt-property-decorator";
 @Component({})
 export default class ListTableItem extends Vue {
     @Prop({ default: "" })
-    header!: string;
+    private header!: string;
 
     @Prop({ default: "" })
-    data!: string;
+    private data!: string;
 
     @Prop({ default: null })
-    url!: string;
+    private url!: string;
 
     openLinkInNewTab() {
         window.open(this.url, "_blank");

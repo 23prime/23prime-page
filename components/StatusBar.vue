@@ -14,12 +14,12 @@ import { Component, Prop, Vue } from "nuxt-property-decorator";
 })
 export default class StatusBar extends Vue {
     @Prop({ default: null })
-    failedMsg!: string;
+    private failedMsg!: string;
 
     @Prop({ default: null })
-    successMsg!: string;
+    private successMsg!: string;
 
     @Prop({ default: false })
-    loading!: boolean;
+    private loading!: boolean;
 }
 </script>
