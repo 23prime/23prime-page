@@ -1,26 +1,19 @@
 <template>
     <div class="btn-wrapper">
-        <v-select
-            v-model="year"
-            :items="years"
-            filled
-            label="year"
-            item-text="state"
-            clearable
-            @change="sendToParent"
-        >
+        <v-select v-model="year" :items="years" filled label="year" item-text="state" clearable>
         </v-select>
     </div>
 </template>
 
 <script lang="ts">
-import { Component, Emit, Vue } from "nuxt-property-decorator";
+import { Component, PropSync, Vue } from "nuxt-property-decorator";
 
 @Component({
     components: {},
 })
-export default class StatusBar extends Vue {
-    private year: number | null = null;
+export default class YearSelector extends Vue {
+    @PropSync("yearProp", { type: Number })
+    private year!: number | null;
 
     private years: number[] = [];
 
@@ -31,11 +24,6 @@ export default class StatusBar extends Vue {
         this.years = Array(nextYear - startYear + 1)
             .fill(null)
             .map((_, i) => i + startYear);
-    }
-
-    @Emit()
-    private sendToParent() {
-        return this.year;
     }
 }
 </script>

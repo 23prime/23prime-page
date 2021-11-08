@@ -8,7 +8,7 @@
             ></status-bar>
 
             <v-row>
-                <year-selector @send-to-parent="setYear"></year-selector>
+                <year-selector :year-prop.sync="year"></year-selector>
 
                 <div class="anime-btn-wrapper">
                     <v-select
@@ -170,10 +170,6 @@ export default class AnimeIndex extends Vue {
 
     mounted() {
         this.seasons = ["spring", "summer", "fall", "winter"];
-    }
-
-    setYear(value: number | null) {
-        this.year = value;
     }
 
     private clearAnimes() {
