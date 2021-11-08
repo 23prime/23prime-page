@@ -8,21 +8,16 @@
             ></status-bar>
 
             <v-row>
-                <div class="anime-btn-wrapper">
-                    <v-select
-                        v-model="season"
-                        :items="seasons"
-                        filled
-                        label="season"
-                        item-text="state"
-                    >
-                    </v-select>
-                </div>
+                <season-selector :season-prop.sync="season" :disabled="false"></season-selector>
             </v-row>
 
             <v-row>
                 <div class="anime-btn-wrapper">
-                    <v-btn class="v-btn-overwrite" :disabled="loading" @click="scrapeAnimes">
+                    <v-btn
+                        class="v-btn-overwrite"
+                        :disabled="loading || !season"
+                        @click="scrapeAnimes"
+                    >
                         Scrape
                     </v-btn>
                 </div>
@@ -105,6 +100,7 @@
 import { Component, Vue } from "nuxt-property-decorator";
 import { $axios } from "@/utils/api";
 import StatusBar from "@/components/StatusBar.vue";
+import SeasonSelector from "@/components/SeasonSelector.vue";
 
 type anime = {
     id: number | null;
@@ -119,7 +115,7 @@ type anime = {
 
 @Component({
     middleware: ["authenticated"],
-    components: { StatusBar },
+    components: { SeasonSelector, StatusBar },
 })
 export default class AnimeNew extends Vue {
     private head() {
@@ -142,9 +138,7 @@ export default class AnimeNew extends Vue {
 
     private selectedAnimes: anime[] = [];
 
-    private seasons = ["spring", "summer", "fall", "winter"];
-
-    private season = this.seasons[0];
+    private season = null;
 
     private failedMsg: string | null = null;
 

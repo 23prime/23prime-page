@@ -9,19 +9,7 @@
 
             <v-row>
                 <year-selector :year-prop.sync="year"></year-selector>
-
-                <div class="anime-btn-wrapper">
-                    <v-select
-                        v-model="season"
-                        :items="seasons"
-                        filled
-                        label="season"
-                        item-text="state"
-                        clearable
-                        :disabled="!year"
-                    >
-                    </v-select>
-                </div>
+                <season-selector :season-prop.sync="season" :disabled="!year"></season-selector>
             </v-row>
 
             <v-row>
@@ -118,6 +106,7 @@ import { Component, Vue } from "nuxt-property-decorator";
 import { $axios } from "@/utils/api";
 import StatusBar from "@/components/StatusBar.vue";
 import YearSelector from "@/components/YearSelector.vue";
+import SeasonSelector from "@/components/SeasonSelector.vue";
 
 type anime = {
     id: number | null;
@@ -132,7 +121,7 @@ type anime = {
 
 @Component({
     middleware: ["authenticated"],
-    components: { StatusBar, YearSelector },
+    components: { SeasonSelector, StatusBar, YearSelector },
 })
 export default class AnimeIndex extends Vue {
     private head() {
@@ -158,8 +147,6 @@ export default class AnimeIndex extends Vue {
 
     private year: number | null = null;
 
-    private seasons: string[] = [];
-
     private season: string | null = null;
 
     private failedMsg: string | null = null;
@@ -167,10 +154,6 @@ export default class AnimeIndex extends Vue {
     private successMsg: string | null = null;
 
     private loading = false;
-
-    mounted() {
-        this.seasons = ["spring", "summer", "fall", "winter"];
-    }
 
     private clearAnimes() {
         this.clearMsgs();
