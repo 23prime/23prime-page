@@ -8,17 +8,7 @@
             ></status-bar>
 
             <v-row>
-                <div class="anime-btn-wrapper">
-                    <v-select
-                        v-model="year"
-                        :items="years"
-                        filled
-                        label="year"
-                        item-text="state"
-                        clearable
-                    >
-                    </v-select>
-                </div>
+                <year-selector @send-to-parent="setYear"></year-selector>
 
                 <div class="anime-btn-wrapper">
                     <v-select
@@ -127,6 +117,7 @@
 import { Component, Vue } from "nuxt-property-decorator";
 import { $axios } from "@/utils/api";
 import StatusBar from "@/components/StatusBar.vue";
+import YearSelector from "@/components/YearSelector.vue";
 
 type anime = {
     id: number | null;
@@ -141,7 +132,7 @@ type anime = {
 
 @Component({
     middleware: ["authenticated"],
-    components: { StatusBar },
+    components: { StatusBar, YearSelector },
 })
 export default class AnimeIndex extends Vue {
     private head() {
@@ -165,8 +156,6 @@ export default class AnimeIndex extends Vue {
 
     private selectedAnimes: anime[] = [];
 
-    private years: number[] = [];
-
     private year: number | null = null;
 
     private seasons: string[] = [];
@@ -180,14 +169,11 @@ export default class AnimeIndex extends Vue {
     private loading = false;
 
     mounted() {
-        // Set years from 2019 to next year
-        const startYear = 2019;
-        const nextYear = new Date().getFullYear() + 1;
-        this.years = Array(nextYear - startYear + 1)
-            .fill(null)
-            .map((_, i) => i + startYear);
-
         this.seasons = ["spring", "summer", "fall", "winter"];
+    }
+
+    setYear(value: number | null) {
+        this.year = value;
     }
 
     private clearAnimes() {
