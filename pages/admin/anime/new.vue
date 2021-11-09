@@ -12,35 +12,10 @@
             </v-row>
 
             <v-row>
-                <div class="anime-btn-wrapper">
-                    <v-btn
-                        class="v-btn-overwrite"
-                        :disabled="loading || !season"
-                        @click="scrapeAnimes"
-                    >
-                        Scrape
-                    </v-btn>
-                </div>
-
-                <div class="anime-btn-wrapper">
-                    <v-btn class="v-btn-overwrite" :disabled="loading" @click="clearAnimes">
-                        Clear
-                    </v-btn>
-                </div>
-
-                <div class="anime-btn-wrapper">
-                    <v-btn
-                        class="v-btn-overwrite"
-                        :disabled="selectedAnimes.length < 1"
-                        @click="registerAnimes"
-                    >
-                        Register
-                    </v-btn>
-                </div>
-
-                <div class="anime-btn-wrapper">
-                    <nuxt-link to="../anime"><v-btn class="v-btn-overwrite">Back</v-btn></nuxt-link>
-                </div>
+                <v-btn :disabled="loading || !season" @click="scrapeAnimes"> Scrape </v-btn>
+                <v-btn :disabled="loading" @click="clearAnimes"> Clear </v-btn>
+                <v-btn :disabled="isSelected" @click="registerAnimes"> Register </v-btn>
+                <nuxt-link to="../anime"><v-btn>Back</v-btn></nuxt-link>
             </v-row>
         </v-container>
 
@@ -157,6 +132,10 @@ export default class AnimeNew extends Vue {
         this.loading = false;
     }
 
+    private isSelected() {
+        return this.selectedAnimes.length < 1;
+    }
+
     private async scrapeAnimes() {
         try {
             this.clearMsgs();
@@ -203,10 +182,6 @@ export default class AnimeNew extends Vue {
 .row {
     margin: 0;
     padding: 0;
-}
-
-.anime-btn-wrapper {
-    padding: 0 0.5rem;
 }
 
 .v-data-table::v-deep th,

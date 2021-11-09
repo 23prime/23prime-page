@@ -13,39 +13,11 @@
             </v-row>
 
             <v-row>
-                <div class="anime-btn-wrapper">
-                    <v-btn class="v-btn-overwrite" @click="showAnimes">Show</v-btn>
-                </div>
-
-                <div class="anime-btn-wrapper">
-                    <v-btn class="v-btn-overwrite" @click="clearAnimes">Clear</v-btn>
-                </div>
-
-                <div class="anime-btn-wrapper">
-                    <v-btn
-                        class="v-btn-overwrite"
-                        :disabled="selectedAnimes.length < 1"
-                        @click="updateAnimes"
-                    >
-                        Update
-                    </v-btn>
-                </div>
-
-                <div class="anime-btn-wrapper">
-                    <v-btn
-                        class="v-btn-overwrite"
-                        :disabled="selectedAnimes.length < 1"
-                        @click="deleteAnimes"
-                    >
-                        Delete
-                    </v-btn>
-                </div>
-
-                <div class="anime-btn-wrapper">
-                    <nuxt-link to="./anime/new"
-                        ><v-btn class="v-btn-overwrite">New</v-btn></nuxt-link
-                    >
-                </div>
+                <v-btn @click="showAnimes">Show</v-btn>
+                <v-btn @click="clearAnimes">Clear</v-btn>
+                <v-btn :disabled="isSelected" @click="updateAnimes"> Update </v-btn>
+                <v-btn :disabled="isSelected" @click="deleteAnimes"> Delete </v-btn>
+                <nuxt-link to="./anime/new"><v-btn>New</v-btn></nuxt-link>
             </v-row>
         </v-container>
 
@@ -166,6 +138,10 @@ export default class AnimeIndex extends Vue {
         this.loading = false;
     }
 
+    private isSelected() {
+        return this.selectedAnimes.length < 1;
+    }
+
     private async showAnimes() {
         try {
             this.clearMsgs();
@@ -235,10 +211,6 @@ export default class AnimeIndex extends Vue {
 .row {
     margin: 0;
     padding: 0;
-}
-
-.anime-btn-wrapper {
-    padding: 0 0.5rem;
 }
 
 .v-data-table::v-deep th,
