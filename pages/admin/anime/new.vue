@@ -33,36 +33,27 @@
                 show-select
             >
                 <template #[`item.year`]="{ item }">
-                    <v-text-field v-model="item.year" class="v-text-field-overwrite"></v-text-field>
+                    <v-text-field v-model="item.year"></v-text-field>
                 </template>
 
                 <template #[`item.season`]="{ item }">
-                    <v-text-field
-                        v-model="item.season"
-                        class="v-text-field-overwrite"
-                    ></v-text-field>
+                    <v-text-field v-model="item.season"></v-text-field>
                 </template>
 
                 <template #[`item.day`]="{ item }">
-                    <v-text-field v-model="item.day" class="v-text-field-overwrite"></v-text-field>
+                    <v-text-field v-model="item.day"></v-text-field>
                 </template>
 
                 <template #[`item.time`]="{ item }">
-                    <v-text-field v-model="item.time" class="v-text-field-overwrite"></v-text-field>
+                    <v-text-field v-model="item.time"></v-text-field>
                 </template>
 
                 <template #[`item.station`]="{ item }">
-                    <v-text-field
-                        v-model="item.station"
-                        class="v-text-field-overwrite"
-                    ></v-text-field>
+                    <v-text-field v-model="item.station"></v-text-field>
                 </template>
 
                 <template #[`item.title`]="{ item }">
-                    <v-text-field
-                        v-model="item.title"
-                        class="v-text-field-overwrite"
-                    ></v-text-field>
+                    <v-text-field v-model="item.title"></v-text-field>
                 </template>
 
                 <template #[`item.recommend`]="{ item }">
@@ -184,7 +175,7 @@ export default class AnimeNew extends Vue {
 
 .v-data-table::v-deep th,
 .v-data-table::v-deep td,
-.v-text-field-overwrite {
+.v-text-field {
     font-size: 0.9rem !important;
 }
 </style>
