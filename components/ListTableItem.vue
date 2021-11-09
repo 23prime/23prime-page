@@ -22,7 +22,7 @@ export default class ListTableItem extends Vue {
     @Prop({ default: null })
     private url!: string;
 
-    openLinkInNewTab() {
+    private openLinkInNewTab() {
         window.open(this.url, "_blank");
     }
 }

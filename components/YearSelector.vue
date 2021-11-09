@@ -17,7 +17,7 @@ export default class YearSelector extends Vue {
 
     private years: number[] = [];
 
-    mounted() {
+    private mounted() {
         // Set years from 2019 to next year
         const startYear = 2019;
         const nextYear = new Date().getFullYear() + 1;

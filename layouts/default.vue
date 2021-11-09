@@ -64,7 +64,7 @@ export default class DefaultLayout extends Vue {
     private drawer = null;
     private logined = false;
 
-    async mounted() {
+    private  async mounted() {
         const auth = await AuthStore.load();
         this.logined = !!auth;
     }
