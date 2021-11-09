@@ -13,10 +13,14 @@
             </v-row>
 
             <v-row>
-                <v-btn @click="showAnimes">Show</v-btn>
-                <v-btn @click="clearAnimes">Clear</v-btn>
-                <v-btn :disabled="isSelected" @click="updateAnimes">Update</v-btn>
-                <v-btn :disabled="isSelected" @click="deleteAnimes">Delete</v-btn>
+                <v-btn :disabled="loading" @click="showAnimes">Show</v-btn>
+                <v-btn :disabled="loading" @click="clearAnimes">Clear</v-btn>
+                <v-btn :disabled="loading || selectedAnimes.length < 1" @click="updateAnimes">
+                    Update
+                </v-btn>
+                <v-btn :disabled="loading || selectedAnimes.length < 1" @click="deleteAnimes">
+                    Delete
+                </v-btn>
                 <nuxt-link to="./anime/new"><v-btn>New</v-btn></nuxt-link>
             </v-row>
         </v-container>
@@ -136,10 +140,6 @@ export default class AnimeIndex extends Vue {
         this.failedMsg = null;
         this.successMsg = null;
         this.loading = false;
-    }
-
-    private isSelected() {
-        return this.selectedAnimes.length < 1;
     }
 
     private async showAnimes() {

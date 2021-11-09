@@ -14,7 +14,9 @@
             <v-row>
                 <v-btn :disabled="loading || !season" @click="scrapeAnimes">Scrape</v-btn>
                 <v-btn :disabled="loading" @click="clearAnimes">Clear</v-btn>
-                <v-btn :disabled="isSelected" @click="registerAnimes">Register</v-btn>
+                <v-btn :disabled="loading || selectedAnimes.length < 1" @click="registerAnimes">
+                    Register
+                </v-btn>
                 <nuxt-link to="../anime"><v-btn>Back</v-btn></nuxt-link>
             </v-row>
         </v-container>
@@ -130,10 +132,6 @@ export default class AnimeNew extends Vue {
         this.failedMsg = null;
         this.successMsg = null;
         this.loading = false;
-    }
-
-    private isSelected() {
-        return this.selectedAnimes.length < 1;
     }
 
     private async scrapeAnimes() {
