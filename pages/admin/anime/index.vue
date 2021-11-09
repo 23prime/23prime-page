@@ -15,8 +15,8 @@
             <v-row>
                 <v-btn @click="showAnimes">Show</v-btn>
                 <v-btn @click="clearAnimes">Clear</v-btn>
-                <v-btn :disabled="isSelected" @click="updateAnimes"> Update </v-btn>
-                <v-btn :disabled="isSelected" @click="deleteAnimes"> Delete </v-btn>
+                <v-btn :disabled="isSelected" @click="updateAnimes">Update</v-btn>
+                <v-btn :disabled="isSelected" @click="deleteAnimes">Delete</v-btn>
                 <nuxt-link to="./anime/new"><v-btn>New</v-btn></nuxt-link>
             </v-row>
         </v-container>

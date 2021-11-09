@@ -12,9 +12,9 @@
             </v-row>
 
             <v-row>
-                <v-btn :disabled="loading || !season" @click="scrapeAnimes"> Scrape </v-btn>
-                <v-btn :disabled="loading" @click="clearAnimes"> Clear </v-btn>
-                <v-btn :disabled="isSelected" @click="registerAnimes"> Register </v-btn>
+                <v-btn :disabled="loading || !season" @click="scrapeAnimes">Scrape</v-btn>
+                <v-btn :disabled="loading" @click="clearAnimes">Clear</v-btn>
+                <v-btn :disabled="isSelected" @click="registerAnimes">Register</v-btn>
                 <nuxt-link to="../anime"><v-btn>Back</v-btn></nuxt-link>
             </v-row>
         </v-container>
