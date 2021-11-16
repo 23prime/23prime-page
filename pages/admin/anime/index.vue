@@ -134,14 +134,16 @@ export default class AnimeIndex extends Vue {
     }
 
     private async showAnimes() {
+        this.clearMsgs();
+        this.loading = true;
+        let url = "/api/animes";
+
+        if (this.year) {
+            url = `${url}/${this.year}`;
+            if (this.season) url = `${url}/${this.season}`;
+        }
+
         try {
-            this.clearMsgs();
-            this.loading = true;
-            let url = "/api/animes";
-            if (this.year) {
-                url = `${url}/${this.year}`;
-                if (this.season) url = `${url}/${this.season}`;
-            }
             const response = await $axios.$get(url);
             this.animes = response.animes;
             this.successMsg = `Succeeded to get ${this.animes.length} animes`;
@@ -157,9 +159,10 @@ export default class AnimeIndex extends Vue {
     }
 
     private async updateAnimes() {
+        this.clearMsgs();
+        this.loading = true;
+
         try {
-            this.clearMsgs();
-            this.loading = true;
             const response = await $axios.$put("/api/animes", { animes: this.selectedAnimes });
             this.successMsg = `Succeeded to update ${response.animes.length} animes`;
         } catch (error: any) {
@@ -174,9 +177,10 @@ export default class AnimeIndex extends Vue {
     }
 
     private async deleteAnimes() {
+        this.clearMsgs();
+        this.loading = true;
+
         try {
-            this.clearMsgs();
-            this.loading = true;
             const response = await $axios.$delete("/api/animes", {
                 data: { animes: this.selectedAnimes },
             });

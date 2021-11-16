@@ -126,9 +126,10 @@ export default class AnimeNew extends Vue {
     }
 
     private async scrapeAnimes() {
+        this.clearMsgs();
+        this.loading = true;
+
         try {
-            this.clearMsgs();
-            this.loading = true;
             const response = await $axios.$get(`/api/scrape/${this.season}`);
             this.animes = response.animes;
             this.successMsg = `Succeeded to scrape and get ${this.animes.length} animes`;
@@ -145,9 +146,10 @@ export default class AnimeNew extends Vue {
     }
 
     private async registerAnimes() {
+        this.clearMsgs();
+        this.loading = true;
+
         try {
-            this.clearMsgs();
-            this.loading = true;
             const response = await $axios.$post(`/api/animes`, { animes: this.selectedAnimes });
             this.successMsg = `Succeeded to register ${response.animes.length} animes`;
         } catch (error: any) {
