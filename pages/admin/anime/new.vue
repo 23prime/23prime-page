@@ -130,7 +130,7 @@ export default class AnimeNew extends Vue {
         this.loading = true;
 
         try {
-            const response = await $axios.$get(`/api/scrape/${this.season}`);
+            const response = await $axios.$get(`/api/animes/scrape/${this.season}`);
             this.animes = response.animes;
             this.successMsg = `Succeeded to scrape and get ${this.animes.length} animes`;
             this.animes.map((a) => (a.recommend = false));
