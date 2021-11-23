@@ -6,15 +6,11 @@ switch (process.env.NODE_ENV) {
     case "production":
         envConfig = {
             apiBaseUrl: "https://api.23prime.xyz",
-            authority: "https://23prime.jp.auth0.com",
-            clientId: "yKhbwNWowq8cAHPzwPwA07j8T80DPHDz",
         };
         break;
     default:
         envConfig = {
             apiBaseUrl: "http://localhost:8080",
-            authority: "https://23prime.jp.auth0.com",
-            clientId: "yKhbwNWowq8cAHPzwPwA07j8T80DPHDz",
         };
 }
 
@@ -116,7 +112,5 @@ export default {
 
     env: {
         API_BASE_URL: envConfig.apiBaseUrl,
-        AUTHORITY: envConfig.authority,
-        CLIENT_ID: envConfig.clientId,
     },
 };
