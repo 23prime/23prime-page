@@ -20,6 +20,12 @@
             ></list-table-item>
 
             <list-table-item
+                header="Zenn"
+                data="@23prime"
+                url="https://zenn.dev/23prime"
+            ></list-table-item>
+
+            <list-table-item
                 header="Instagram"
                 data="@23_prime"
                 url="https://www.instagram.com/23_prime/"
