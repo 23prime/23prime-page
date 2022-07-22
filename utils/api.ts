@@ -1,5 +1,5 @@
 /* eslint-disable import/no-mutable-exports */
-import { NuxtAxiosInstance } from "@nuxtjs/axios";
+import type { NuxtAxiosInstance } from "@nuxtjs/axios";
 
 let $axios: NuxtAxiosInstance;
 
