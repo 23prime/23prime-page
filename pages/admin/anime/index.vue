@@ -149,7 +149,7 @@ export default class AnimeIndex extends Vue {
             this.successMsg = `Succeeded to get ${this.animes.length} animes`;
         } catch (error: any) {
             if (error.response?.status === 401) {
-                this.failedMsg = "Failed to call API: Aaccess token is invalid. Please re-login.";
+                this.failedMsg = "Failed to call API: Access token is invalid. Please re-login.";
             } else {
                 this.failedMsg = "Failed to call API: Please try again.";
             }
@@ -167,7 +167,7 @@ export default class AnimeIndex extends Vue {
             this.successMsg = `Succeeded to update ${response.animes.length} animes`;
         } catch (error: any) {
             if (error.response?.status === 401) {
-                this.failedMsg = "Failed to call API: Aaccess token is invalid. Please re-login.";
+                this.failedMsg = "Failed to call API: Access token is invalid. Please re-login.";
             } else {
                 this.failedMsg = "Failed to call API: Please try again.";
             }
@@ -187,7 +187,7 @@ export default class AnimeIndex extends Vue {
             this.successMsg = `Succeeded to delete ${response.animes.length} animes`;
         } catch (error: any) {
             if (error.response?.status === 401) {
-                this.failedMsg = "Failed to call API: Aaccess token is invalid. Please re-login.";
+                this.failedMsg = "Failed to call API: Access token is invalid. Please re-login.";
             } else {
                 this.failedMsg = "Failed to call API: Please try again.";
             }
