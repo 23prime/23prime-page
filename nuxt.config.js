@@ -113,4 +113,10 @@ export default {
     env: {
         API_BASE_URL: envConfig.apiBaseUrl,
     },
+
+    storybook: {
+        parameters: {
+            layout: "centered",
+        },
+    },
 };
