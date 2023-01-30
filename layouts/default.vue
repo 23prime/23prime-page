@@ -75,8 +75,7 @@ export default class DefaultLayout extends Vue {
 
     private async logout() {
         await AuthStore.destroy();
-        this.$router.push("/");
-        location.reload();
+        window.location.href = `${process.env.API_BASE_URL}/auth/logout`;
     }
 }
 </script>
