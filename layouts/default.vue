@@ -14,13 +14,13 @@
                     <link-menu icon="fa-link" title="Links" />
                 </nuxt-link>
 
-                <div v-if="logined">
+                <div v-if="loggedIn">
                     <nuxt-link to="/admin/anime">
                         <link-menu icon="fa-edit" title="Anime" />
                     </nuxt-link>
                 </div>
 
-                <div v-if="logined" @click="logout">
+                <div v-if="loggedIn" @click="logout">
                     <link-menu icon="fa-sign-out-alt" title="Logout" />
                 </div>
 
@@ -62,11 +62,11 @@ import { AuthStore } from "@/store";
 })
 export default class DefaultLayout extends Vue {
     private drawer = null;
-    private logined = false;
+    private loggedIn = false;
 
-    private  async mounted() {
+    private async mounted() {
         const auth = await AuthStore.load();
-        this.logined = !!auth;
+        this.loggedIn = !!auth;
     }
 
     private login() {
